@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore di scale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f2f4f7;
+        }
 
+        .scheda {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        input, button {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 16px;
+            font-size: 16px;
+        }
+
+        button {
+            background: #1769aa;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        #risultato {
+            font-weight: bold;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="scheda">
+        <h1>Calcolatore di scale</h1>
+        <p>Inserisci l'altezza da superare e il numero di alzate.</p>
+
+        <label for="altezza">Altezza totale (cm)</label>
+        <input id="altezza" type="number" value="300" min="1">
+
+        <label for="alzate">Numero di alzate</label>
+        <input id="alzate" type="number" value="17" min="1" step="1">
+
+        <button onclick="calcola()">Calcola</button>
+
+        <div id="risultato"></div>
+    </div>
+
+    <script>
+        function calcola() {
+            const altezza = Number(document.getElementById("altezza").value);
+            const alzate = Number(document.getElementById("alzate").value);
+            const risultato = document.getElementById("risultato");
+
+            if (altezza <= 0 || alzate <= 0 || !Number.isInteger(alzate)) {
+                risultato.textContent = "Inserisci valori validi.";
+                return;
+            }
+
+            const altezzaAlzata = altezza / alzate;
+
+            risultato.innerHTML =
+                "Altezza totale: " + altezza + " cm<br>" +
+                "Numero di alzate: " + alzate + "<br>" +
+                "Altezza di ogni alzata: " +
+                altezzaAlzata.toFixed(2) + " cm";
+        }
+    </script>
+</body>
+</html>
